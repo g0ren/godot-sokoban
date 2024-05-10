@@ -1,0 +1,100 @@
+[gd_scene load_steps=14 format=3 uid="uid://bdt3oohhajkq5"]
+
+[ext_resource type="Texture2D" uid="uid://bqopafl0lmxj2" path="res://img/bg.jpg" id="1_6g51s"]
+[ext_resource type="Script" path="res://Menu.gd" id="1_d74q3"]
+[ext_resource type="Script" path="res://NewGameButton.gd" id="2_g01ru"]
+
+[sub_resource type="Gradient" id="Gradient_o6rr4"]
+colors = PackedColorArray(0.580392, 0.545098, 0.678431, 0.282353, 0.354757, 0.711829, 0.83674, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3swwt"]
+gradient = SubResource("Gradient_o6rr4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r0278"]
+texture = SubResource("GradientTexture1D_3swwt")
+
+[sub_resource type="Gradient" id="Gradient_klw57"]
+colors = PackedColorArray(0.952874, 0.560369, 0.953809, 1, 0.626713, 3.07555e-05, 0.479051, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_72qe6"]
+gradient = SubResource("Gradient_klw57")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bxmnn"]
+texture = SubResource("GradientTexture1D_72qe6")
+
+[sub_resource type="Gradient" id="Gradient_2uiiu"]
+colors = PackedColorArray(0.362372, 0.232796, 0.916697, 1, 0, 0.780392, 0.780392, 0.34902)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yrv6e"]
+gradient = SubResource("Gradient_2uiiu")
+fill_from = Vector2(0.36715, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1qam5"]
+texture = SubResource("GradientTexture2D_yrv6e")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjkyq"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+script = ExtResource("1_d74q3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 215.0
+offset_right = 360.0
+offset_bottom = 419.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_r0278")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bxmnn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_1qam5")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_kjkyq")
+theme_override_styles/focus = SubResource("StyleBoxTexture_r0278")
+text = "NEW GAME"
+script = ExtResource("2_g01ru")
+
+[node name="OptionsButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_r0278")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bxmnn")
+text = "OPTIONS"
+
+[node name="QuitButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_r0278")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bxmnn")
+text = "QUIT"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Bg" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(644, 365)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_6g51s")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 1.0
+offset_top = 28.0
+offset_right = 1150.0
+offset_bottom = 222.0
+bbcode_enabled = true
+text = "[left][color=purple]                                                                                                  Neon Genesis[/color][/left]
+[center][b][i][font_size=88]Sokoban[/font_size][/i][/b][/center]
+[right][color=darkblue]Νέον Γένεσις 倉庫番                                                         "
+
+[connection signal="mouse_entered" from="Menu/MarginContainer/VBoxContainer/NewGameButton" to="Menu/MarginContainer/VBoxContainer/NewGameButton" method="_on_mouse_entered"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/NewGameButton" to="Menu" method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed"]
